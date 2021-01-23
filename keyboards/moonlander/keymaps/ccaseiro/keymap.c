@@ -25,7 +25,7 @@ enum layers {
     DVORAK,
     GAME,
     NUMPAD,
-    MDIA,
+    _CMD,
     SWITCH,
 };
 
@@ -42,6 +42,9 @@ enum custom_keycodes {
 #define TO_GAME TO(GAME)
 
 #define SPC_NUM LT(NUMPAD, KC_SPC)
+#define ESC_CMD LT(_CMD, KC_ESC)
+
+#define CMD(X) LGUI(X)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -50,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    XXXXXXX,           XXXXXXX, KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
         CTL_ESC, HOME_A,  HOME_O,  HOME_E,  HOME_U,  KC_I,    KC_HYPR,           KC_MEH,  KC_D,    HOME_H,  HOME_T,  HOME_N,  HOME_S,  KC_MINS,
         OSM_SFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_CAPS,
-        MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, KC_ESC,           XXXXXXX,           XXXXXXX,          KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, MO_SWIT,
+        MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, MO_SWIT,
                                             SPC_NUM, KC_TAB,  KC_ENT,            XXXXXXX, KC_ENT,  KC_BSPC
     ),
 
@@ -72,13 +75,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______, _______,           _______, KC_LBRC, KC_RBRC
     ),
 
-    [MDIA] = LAYOUT_moonlander(
-        LED_LEVEL,_______,_______, _______, _______, _______, _______,           _______, _______, _______, _______, _______, _______, RESET,
-        _______, _______, _______, KC_MS_U, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,           _______, _______, _______, _______, _______, _______, KC_MPLY,
-        _______, _______, _______, _______, _______, _______,                             _______, _______, KC_MPRV, KC_MNXT, _______, _______,
-        _______, _______, _______, KC_BTN1, KC_BTN2,         _______,            _______,          KC_VOLU, KC_VOLD, KC_MUTE, _______, _______,
-                                            _______, _______, _______,           _______, _______, _______
+    [_CMD] = LAYOUT_moonlander(
+        CMD(KC_GRV), CMD(KC_1), CMD(KC_2), CMD(KC_3), CMD(KC_4), CMD(KC_5), _______,     _______, CMD(KC_6), CMD(KC_7), CMD(KC_8),    CMD(KC_9),   CMD(KC_0),    _______,
+        _______,     CMD(KC_Q), CMD(KC_W), CMD(KC_E), CMD(KC_R), CMD(KC_T), _______,     _______, CMD(KC_Y), CMD(KC_U), CMD(KC_I),    CMD(KC_O),   CMD(KC_P),    _______,
+        _______,     CMD(KC_A), CMD(KC_S), CMD(KC_D), CMD(KC_F), CMD(KC_G), _______,     _______, CMD(KC_H), CMD(KC_J), CMD(KC_K),    CMD(KC_L),   CMD(KC_SCLN), _______,
+        _______,     CMD(KC_Z), CMD(KC_X), CMD(KC_C), CMD(KC_V), CMD(KC_B),                       CMD(KC_N), CMD(KC_M), CMD(KC_COMM), CMD(KC_DOT), CMD(KC_SLSH), _______,
+        _______,     _______,   _______,   _______,   _______,              _______,     _______,            _______,   _______,      _______,     _______,      _______,
+                                                      _______,   _______,   _______,     _______, _______,   _______
     ),
 
     [SWITCH] = LAYOUT_moonlander(
