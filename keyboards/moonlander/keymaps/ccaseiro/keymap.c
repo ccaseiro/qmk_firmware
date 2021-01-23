@@ -22,18 +22,31 @@
 #include "version.h"
 
 enum layers {
-    BASE,  // default layer
-    SYMB,  // symbols
-    MDIA,  // media keys
+    DVORAK, // Dvorak
+    BASE,   // default layer
+    SYMB,   // symbols
+    MDIA,   // media keys
 };
 
 enum custom_keycodes {
     VRSN = ML_SAFE_RANGE,
 };
 
+#define CTL_ESC LCTL_T(KC_ESC)
+#define OSM_SFT KC_LSFT
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [BASE] = LAYOUT_moonlander(
+    [DVORAK] = LAYOUT_moonlander(
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    XXXXXXX,           XXXXXXX, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
+        KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    XXXXXXX,           XXXXXXX, KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
+        CTL_ESC, KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_HYPR,           KC_MEH,  KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    KC_MINS,
+        OSM_SFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_CAPS,
+        RESET,   KC_LGUI, KC_LALT, KC_LALT, KC_ESC,           XXXXXXX,           XXXXXXX,          KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, RESET,
+                                            KC_SPC,  KC_TAB,  KC_ENT,            XXXXXXX, KC_ENT,  KC_BSPC
+    ),
+
+     [BASE] = LAYOUT_moonlander(
         KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LEFT,           KC_RGHT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
         KC_DEL,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    TG(SYMB),         TG(SYMB), KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS,
         KC_BSPC, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HYPR,           KC_MEH,  KC_H,    KC_J,    KC_K,    KC_L,    LT(MDIA, KC_SCLN), LGUI_T(KC_QUOT),
