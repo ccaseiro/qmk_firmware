@@ -19,3 +19,14 @@
 #pragma once
 
 #define ORYX_CONFIGURATOR
+
+// Home row mods, using Dvorak ... AOEU <--> HTNS
+#define HOME_A              LCTL_T(KC_A)
+#define HOME_O              LALT_T(KC_O)
+#define HOME_E              LSFT_T(KC_E)
+#define HOME_U              LGUI_T(KC_U)
+#define HOME_H              LGUI_T(KC_H)
+#define HOME_T              LSFT_T(KC_T)
+#define HOME_N              LALT_T(KC_N)
+#define HOME_S              LCTL_T(KC_S)
+
