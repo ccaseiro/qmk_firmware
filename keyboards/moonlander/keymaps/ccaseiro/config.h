@@ -20,6 +20,19 @@
 
 #define ORYX_CONFIGURATOR
 
+// Default tapping term is 200
+#define TAPPING_TERM 220
+
+// Prevent normal rollover on alphas from accidentally triggering mods.
+#define IGNORE_MOD_TAP_INTERRUPT
+
+// This prevents short hold periods to be interpreted as individual taps when typing quickly.
+#define PERMISSIVE_HOLD
+
+// This prevents accidental repeats of the tap-hold keys when typing quickly.
+#define TAPPING_FORCE_HOLD
+
+
 // Home row mods, using Dvorak ... AOEU <--> HTNS
 #define HOME_A              LCTL_T(KC_A)
 #define HOME_O              LALT_T(KC_O)
