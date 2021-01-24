@@ -30,3 +30,11 @@
 #define HOME_N              LALT_T(KC_N)
 #define HOME_S              LCTL_T(KC_S)
 
+#define COLE_A              LCTL_T(KC_A)
+#define COLE_R              LALT_T(KC_R)
+#define COLE_S              LSFT_T(KC_S)
+#define COLE_T              LGUI_T(KC_T)
+#define COLE_N              LGUI_T(KC_N)
+#define COLE_E              LSFT_T(KC_E)
+#define COLE_I              LALT_T(KC_I)
+#define COLE_O              LCTL_T(KC_O)
