@@ -27,6 +27,7 @@ enum layers {
     GAME,
     NUMPAD,
     _NAV,
+    _MED,
     _CMD,
     SWITCH,
 };
@@ -47,6 +48,7 @@ enum custom_keycodes {
 #define SPC_NUM LT(NUMPAD, KC_SPC)
 #define ESC_CMD LT(_CMD, KC_ESC)
 #define BSP_NAV LT(_NAV, KC_BSPC)
+#define ENT_MED LT(_MED, KC_ENT)
 
 #define CMD(X) LGUI(X)
 
@@ -57,8 +59,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    XXXXXXX,           XXXXXXX, KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
         CTL_ESC, HOME_A,  HOME_O,  HOME_E,  HOME_U,  KC_I,    KC_HYPR,           KC_MEH,  KC_D,    HOME_H,  HOME_T,  HOME_N,  HOME_S,  KC_MINS,
         OSM_SFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_CAPS,
-        MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, MO_SWIT,
-                                            SPC_NUM, KC_TAB,  KC_ENT,            XXXXXXX, KC_ENT,  BSP_NAV
+        MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          ENT_MED ,XXXXXXX, XXXXXXX, XXXXXXX, MO_SWIT,
+                                            SPC_NUM, KC_TAB,  KC_ENT,            XXXXXXX, ENT_MED ,BSP_NAV
     ),
 
     [COLEMAK] = LAYOUT_moonlander(
@@ -95,6 +97,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______,          _______,           _______,          _______, _______, _______, _______, _______,
                                             KC_CAPS, _______, _______,           _______, _______, _______
+    ),
+
+    [_MED] = LAYOUT_moonlander(
+        _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, KC_VOLU, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, KC_MPRV, KC_VOLD, KC_MNXT, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, KC_MUTE,          _______,           _______,          _______, _______, _______, _______, _______,
+                                            KC_MPLY, KC_MSTP, KC_MUTE,           _______, _______, _______
     ),
 
     [_CMD] = LAYOUT_moonlander(
