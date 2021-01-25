@@ -25,7 +25,8 @@ enum layers {
     DVORAK,
     COLEMAK,
     GAME,
-    NUMPAD,
+    NUMPAD_DVORAK,
+    NUMPAD_COLEMAK,
     _NAV,
     _MED,
     _CMD,
@@ -45,7 +46,8 @@ enum custom_keycodes {
 #define TO_CLMK TO(COLEMAK)
 #define TO_GAME TO(GAME)
 
-#define SPC_NUM LT(NUMPAD, KC_SPC)
+#define SP_NU_C LT(NUMPAD_COLEMAK, KC_SPC)
+#define SP_NU_D LT(NUMPAD_DVORAK, KC_SPC)
 #define ESC_CMD LT(_CMD, KC_ESC)
 #define BSP_NAV LT(_NAV, KC_BSPC)
 #define ENT_MED LT(_MED, KC_ENT)
@@ -60,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CTL_ESC, HOME_A,  HOME_O,  HOME_E,  HOME_U,  KC_I,    KC_HYPR,           KC_MEH,  KC_D,    HOME_H,  HOME_T,  HOME_N,  HOME_S,  KC_MINS,
         OSM_SFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_CAPS,
         MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          ENT_MED ,XXXXXXX, XXXXXXX, XXXXXXX, MO_SWIT,
-                                            SPC_NUM, KC_TAB,  KC_ENT,            XXXXXXX, ENT_MED ,BSP_NAV
+                                            SP_NU_D, KC_TAB,  KC_ENT,            XXXXXXX, ENT_MED ,BSP_NAV
     ),
 
     [COLEMAK] = LAYOUT_moonlander(
@@ -69,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         CTL_ESC, COLE_A,  COLE_R,  COLE_S,  COLE_T,  KC_G,    KC_HYPR,           KC_MEH,  KC_M,    COLE_N,  COLE_E,  COLE_I,  COLE_O,  KC_MINS,
         OSM_SFT, KC_Z    ,KC_X,    KC_C,    KC_D,    KC_V,                                KC_K,    KC_H,    KC_COMM ,KC_DOT  ,KC_SLSH ,KC_CAPS,
         MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, MO_SWIT,
-                                            SPC_NUM, KC_TAB,  KC_ENT,            XXXXXXX, KC_ENT,  BSP_NAV
+                                            SP_NU_C, KC_TAB,  KC_ENT,            XXXXXXX, KC_ENT,  BSP_NAV
     ),
 
      [GAME] = LAYOUT_moonlander(
@@ -81,11 +83,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_SPC,  KC_TAB,  KC_ENT,            _______, _______, _______
     ),
 
-    [NUMPAD] = LAYOUT_moonlander(
+    [NUMPAD_DVORAK] = LAYOUT_moonlander(
         _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______,           _______, KC_GRV,  KC_7,    KC_8,    KC_9,    KC_0,    _______,
         _______, _______, _______, _______, _______, _______, _______,           _______, KC_EQL,  KC_4,    KC_5,    KC_6,    KC_MINS, _______,
         _______, _______, _______, _______, _______, _______,                             KC_BSLS, KC_1,    KC_2,    KC_3,    KC_SLSH, _______,
+        _______, _______, _______, _______, _______,          _______,           _______,          KC_0,    _______, _______, _______, _______,
+                                            _______, _______, _______,           _______, KC_LBRC, KC_RBRC
+    ),
+
+    [NUMPAD_COLEMAK] = LAYOUT_moonlander(
+        _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, KC_COLN, _______, _______, _______,           _______, KC_GRV,  KC_7,    KC_8,    KC_9,    KC_0,    _______,
+        _______, _______, _______, _______, _______, _______, _______,           _______, KC_EQL,  KC_4,    KC_5,    KC_6,    KC_MINS, _______,
+        _______, _______, _______, _______, _______, _______,                             KC_BSLS, KC_1,    KC_2,    KC_3,    KC_QUOT, _______,
         _______, _______, _______, _______, _______,          _______,           _______,          KC_0,    _______, _______, _______, _______,
                                             _______, _______, _______,           _______, KC_LBRC, KC_RBRC
     ),
