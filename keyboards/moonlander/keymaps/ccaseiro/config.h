@@ -51,3 +51,12 @@
 #define COLE_E              RSFT_T(KC_E)
 #define COLE_I              LALT_T(KC_I)
 #define COLE_O              RCTL_T(KC_O)
+
+#define QWRT_A              LCTL_T(KC_A)
+#define QWRT_S              LALT_T(KC_S)
+#define QWRT_D              LSFT_T(KC_D)
+#define QWRT_F              LGUI_T(KC_F)
+#define QWRT_J              RGUI_T(KC_J)
+#define QWRT_K              RSFT_T(KC_K)
+#define QWRT_L              LALT_T(KC_L)
+#define QWRT_SC             RCTL_T(KC_SCLN)

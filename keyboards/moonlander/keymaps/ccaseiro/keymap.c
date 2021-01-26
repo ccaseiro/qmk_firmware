@@ -24,6 +24,7 @@
 enum layers {
     DVORAK,
     COLEMAK,
+    QWERTY,
     GAME,
     NUMPAD_DVORAK,
     NUMPAD_COLEMAK,
@@ -44,7 +45,10 @@ enum custom_keycodes {
 
 #define TO_DVRK TO(DVORAK)
 #define TO_CLMK TO(COLEMAK)
+#define TO_QWRT TO(QWERTY)
 #define TO_GAME TO(GAME)
+
+#define MO_QWRT MO(QWERTY)
 
 #define SP_NU_C LT(NUMPAD_COLEMAK, KC_SPC)
 #define SP_NU_D LT(NUMPAD_DVORAK, KC_SPC)
@@ -61,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_QUOT, KC_COMM, KC_DOT,  KC_P,    KC_Y,    XXXXXXX,           XXXXXXX, KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_SLSH,
         CTL_ESC, HOME_A,  HOME_O,  HOME_E,  HOME_U,  KC_I,    KC_HYPR,           KC_MEH,  KC_D,    HOME_H,  HOME_T,  HOME_N,  HOME_S,  KC_MINS,
         OSM_SFT, KC_SCLN, KC_Q,    KC_J,    KC_K,    KC_X,                                KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    KC_CAPS,
-        MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          ENT_MED ,XXXXXXX, XXXXXXX, XXXXXXX, MO_SWIT,
+        MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          ENT_MED ,MO_QWRT, XXXXXXX, XXXXXXX, MO_SWIT,
                                             SP_NU_D, KC_TAB,  KC_ENT,            XXXXXXX, ENT_MED ,BSP_NAV
     ),
 
@@ -70,7 +74,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q    ,KC_W    ,KC_F    ,KC_P    ,KC_B,    XXXXXXX,           XXXXXXX, KC_J    ,KC_L    ,KC_U    ,KC_Y    ,KC_SCLN ,KC_SLSH,
         CTL_ESC, COLE_A,  COLE_R,  COLE_S,  COLE_T,  KC_G,    KC_HYPR,           KC_MEH,  KC_M,    COLE_N,  COLE_E,  COLE_I,  COLE_O,  KC_MINS,
         OSM_SFT, KC_Z    ,KC_X,    KC_C,    KC_D,    KC_V,                                KC_K,    KC_H,    KC_COMM ,KC_DOT  ,KC_SLSH ,KC_CAPS,
-        MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          KC_ENT,  XXXXXXX, XXXXXXX, XXXXXXX, MO_SWIT,
+        MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          KC_ENT,  MO_QWRT, XXXXXXX, XXXXXXX, MO_SWIT,
+                                            SP_NU_C, KC_TAB,  KC_ENT,            XXXXXXX, KC_ENT,  BSP_NAV
+    ),
+
+    [QWERTY] = LAYOUT_moonlander(
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    XXXXXXX,           XXXXXXX, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL,
+        KC_TAB,  KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T,    XXXXXXX,           XXXXXXX, KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_SLSH,
+        CTL_ESC, QWRT_A,  QWRT_S,  QWRT_D,  QWRT_F,  KC_G,    KC_HYPR,           KC_MEH,  KC_H,    QWRT_J,  QWRT_K,  QWRT_L,  QWRT_SC ,KC_MINS,
+        OSM_SFT, KC_Z    ,KC_X,    KC_C,    KC_V,    KC_B,                                KC_N,    KC_M,    KC_COMM ,KC_DOT  ,KC_SLSH ,KC_CAPS,
+        MO_SWIT, KC_LGUI, KC_LALT, KC_LALT, ESC_CMD,          XXXXXXX,           XXXXXXX,          KC_ENT,  MO_QWRT ,XXXXXXX, XXXXXXX, MO_SWIT,
                                             SP_NU_C, KC_TAB,  KC_ENT,            XXXXXXX, KC_ENT,  BSP_NAV
     ),
 
@@ -131,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [SWITCH] = LAYOUT_moonlander(
         _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, _______, _______, _______, RESET,
         _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
-        _______, TO_DVRK, TO_CLMK, TO_GAME, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
+        _______, TO_DVRK, TO_CLMK, TO_QWRT ,TO_GAME ,_______, _______,           _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______,                             _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______,          _______,           _______,          _______, _______, _______, _______, _______,
                                             _______, _______, _______,           _______, _______, _______
