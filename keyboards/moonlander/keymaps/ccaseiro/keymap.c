@@ -151,6 +151,84 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
+#define CC1 {169,255,255} // Blue
+#define CC2 {85,255,255}  // Green
+#define CC3 {0,255,255}   // Red
+#define CC4 {43,255,255}  // Yellow
+#define CC5 {180,255,255} // Violet
+#define CC6 {148,255,255} // Azure
+
+
+
+
+const uint8_t PROGMEM layer_color[][3] = {
+    [DVORAK]  = CC1,
+    [COLEMAK] = CC6,
+    [QWERTY]  = CC2,
+    [GAME]    = CC3,
+};
+
+/* const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = { */
+/*     [DVORAK] = { CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1 }, */
+/*  */
+/*     [COLEMAK] = { CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1 }, */
+/*  */
+/*     [QWERTY] = { CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2, CC2 }, */
+/*  */
+/*     [GAME] = { CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3, CC3 }, */
+/*  */
+/*     [SWITCH] = { CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1, CC1 }, */
+/*  */
+/* }; */
+
+void set_layer_color(int layer) {
+  HSV hsv = {
+    .h = pgm_read_byte(&layer_color[layer][0]),
+    .s = pgm_read_byte(&layer_color[layer][1]),
+    .v = pgm_read_byte(&layer_color[layer][2]),
+  };
+  for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+    /* HSV hsv = { */
+    /*   .h = pgm_read_byte(&ledmap[layer][i][0]), */
+    /*   .s = pgm_read_byte(&ledmap[layer][i][1]), */
+    /*   .v = pgm_read_byte(&ledmap[layer][i][2]), */
+    /* }; */
+    if (!hsv.h && !hsv.s && !hsv.v) {
+        rgb_matrix_set_color( i, 0, 0, 0 );
+    } else {
+        RGB rgb = hsv_to_rgb( hsv );
+        float f = (float)rgb_matrix_config.hsv.v / UINT8_MAX;
+        rgb_matrix_set_color( i, f * rgb.r, f * rgb.g, f * rgb.b );
+    }
+  }
+}
+
+void rgb_matrix_indicators_user(void) {
+  if (g_suspend_state || keyboard_config.disable_layer_led) { return; }
+  switch (biton32(layer_state)) {
+    case DVORAK:
+      set_layer_color(DVORAK);
+      break;
+    case COLEMAK:
+      set_layer_color(COLEMAK);
+      break;
+    case QWERTY:
+      set_layer_color(QWERTY);
+      break;
+    case GAME:
+      set_layer_color(GAME);
+      break;
+    case SWITCH:
+      set_layer_color(SWITCH);
+      break;
+   default:
+    if (rgb_matrix_get_flags() == LED_FLAG_NONE)
+      rgb_matrix_set_color_all(0, 0, 0);
+    break;
+  }
+}
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         switch (keycode) {
