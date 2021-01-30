@@ -211,6 +211,21 @@ void rgb_matrix_indicators_user(void) {
       break;
     case COLEMAK:
       set_layer_color(COLEMAK);
+      if (host_keyboard_leds()  & (1<<USB_LED_CAPS_LOCK) ) {
+        rgb_matrix_set_color( 0, 255,255,0);
+        rgb_matrix_set_color( 0, 255,255,1);
+        rgb_matrix_set_color( 1, 255,255,0);
+        rgb_matrix_set_color( 2, 255,255,0);
+        rgb_matrix_set_color( 3, 255,255,0);
+        rgb_matrix_set_color( 4, 255,255,0);
+        rgb_matrix_set_color( 36, 255,255,0);
+        rgb_matrix_set_color( 37, 255,255,0);
+        rgb_matrix_set_color( 38, 255,255,0);
+        rgb_matrix_set_color( 39, 255,255,0);
+        rgb_matrix_set_color( 40, 255,255,0);
+        /* rgblight_sethsv_at(39, 255, 255, 0); */
+        /* rgblight_sethsv_at(39, 255, 255, 1); */
+      }
       break;
     case QWERTY:
       set_layer_color(QWERTY);
